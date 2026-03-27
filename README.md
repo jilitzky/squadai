@@ -1,2 +1,2 @@
-# AIKit
-An exploration of game AI techniques written in Python.
+# SquadAI
+A simple implementation of squad AI written in Python.
