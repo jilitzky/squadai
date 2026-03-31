@@ -4,24 +4,22 @@ class Blackboard:
     def __init__(self):
         self.data = {}
         self.timestamps = {}
+        self.ticks = 0 # TODO: Relocate to simulation
 
     def set(self, key, value):
         self.data[key] = value
-        self.timestamps[key] = time.time()
+        self.timestamps[key] = self.ticks
 
     def get(self, key, default=None, expiry=None):
         if key not in self.data:
             return default
-        if expiry and (time.time() - self.timestamps[key] > expiry):
+        
+        age = self.ticks - self.timestamps[key]
+        if expiry is not None and age > expiry:
             return default
+        
         return self.data[key]
 
-    def has_role_filled(self, role_name):
-        from constants import KEY_ACTIVE_ROLES
-        return self.get(KEY_ACTIVE_ROLES, {}).get(role_name, False)
-
-    def claim_role(self, role_name, agent_id):
-        from constants import KEY_ACTIVE_ROLES
-        roles = self.get(KEY_ACTIVE_ROLES, {})
-        roles[role_name] = agent_id
-        self.set(KEY_ACTIVE_ROLES, roles)
+    # TODO: The tick should be done on a simulation object
+    def tick(self):
+        self.ticks += 1
