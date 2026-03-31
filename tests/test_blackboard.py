@@ -1,4 +1,5 @@
 from blackboard import Blackboard
+from simulation import sim
 
 KEY_PLAYER_POS = "player_pos"
 
@@ -15,5 +16,5 @@ def test_get_expired():
     bb = Blackboard()
     bb.set(KEY_PLAYER_POS, (0, 0))
     assert bb.get(KEY_PLAYER_POS, expiry=0) != None
-    bb.tick()
+    sim.tick()
     assert bb.get(KEY_PLAYER_POS, expiry=0) == None
