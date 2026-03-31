@@ -1,2 +1,2 @@
 # SquadAI
-A simple implementation of squad AI written in Python.
+An exploration of squad AI for games written in Python.
