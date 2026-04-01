@@ -11,10 +11,14 @@ class Blackboard:
 
     def get(self, key, default=None, expiry=None):
         if key not in self.data:
-            return default
+            return default, 0.0
         
+        if expiry is None:
+            return self.data[key], 1.0
+
         age = sim.ticks - self.timestamps[key]
-        if expiry is not None and age > expiry:
-            return default
-        
-        return self.data[key]
+        if age >= expiry:
+            return default, 0.0
+
+        confidence = (expiry - age) / expiry
+        return self.data[key], confidence
