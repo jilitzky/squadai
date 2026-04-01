@@ -20,5 +20,5 @@ class Blackboard:
         if age >= expiry:
             return default, 0.0
 
-        confidence = (expiry - age) / expiry
+        confidence = 1.0 - (age / expiry)
         return self.data[key], confidence
