@@ -1,2 +1,2 @@
 # SquadAI
-A Python implementation of squad AI for video games.
+A Python implementation of distributed squad AI for video games.
