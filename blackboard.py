@@ -1,4 +1,5 @@
 from simulation import sim
+from typing import Any, Tuple
 
 class Blackboard:
     def __init__(self):
@@ -9,12 +10,16 @@ class Blackboard:
         self.data[key] = value
         self.timestamps[key] = sim.ticks
 
-    def get(self, key, default=None, expiry=None):
+    def get(self, key, default=None, expiry: int = None) -> Tuple[Any, float]:
         if key not in self.data:
-            return default
+            return default, 0.0
         
+        if expiry is None:
+            return self.data[key], 1.0
+
         age = sim.ticks - self.timestamps[key]
-        if expiry is not None and age > expiry:
-            return default
-        
-        return self.data[key]
+        if age >= expiry:
+            return default, 0.0
+
+        confidence = 1.0 - (age / expiry)
+        return self.data[key], confidence
