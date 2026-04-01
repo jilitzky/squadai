@@ -1,5 +1,6 @@
 from blackboard import Blackboard
 from simulation import sim
+import math
 
 KEY_PLAYER_POS = "player_pos"
 
@@ -24,7 +25,7 @@ def test_get_confidence():
     sim.tick()
     value, confidence = bb.get(KEY_PLAYER_POS, expiry=2)
     assert value != None
-    assert confidence == 0.5
+    assert math.isclose(confidence, 0.5)
 
     sim.tick()
     value, confidence = bb.get(KEY_PLAYER_POS, expiry=2)
