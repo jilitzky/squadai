@@ -1,8 +1,11 @@
 from agent import Agent
 from simulation import sim
 
-# Horizontal = 10 units
-# Vertical   = 30 units
+# . = Origin
+# p = Player
+# > = Agent
+# _ = Sight Radius (10 units)
+# | = Sight Radius (30 units)
 
 #  ___ 
 # |   |
