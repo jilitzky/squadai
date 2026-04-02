@@ -12,7 +12,8 @@ class Agent:
         self.blackboard = Blackboard()
 
     def can_see_player(self):
-        value, _ = self.blackboard.get(keys.PLAYER_POS, expiry=1)
+        # TODO: The agent should be able to request an expiry of 0 and still get a valid player position because it was set on the same tick
+        value, _ = self.blackboard.get(keys.PLAYER_POS, expiry=1) #expiry=0
         return value != None
 
     # TODO: Should this be done as part of a tick()?
