@@ -11,13 +11,7 @@ class Agent:
         self.sight_range = sight_range
         self.blackboard = Blackboard()
 
-    def can_see_player(self):
-        # TODO: The agent should be able to request an expiry of 0 and still get a valid player position because it was set on the same tick
-        value, _ = self.blackboard.get(keys.PLAYER_POS, expiry=1) #expiry=0
-        return value != None
-
-    # TODO: Should this be done as part of a tick()?
-    def search_for_player(self):
+    def tick(self):
         player_pos = sim.player_pos
         # TODO: Is there a vector class I can use to avoid using tuples for position and orientation?
         to_player = (player_pos[0] - self.position[0], player_pos[1] - self.position[1])
@@ -26,6 +20,11 @@ class Agent:
             distance = math.dist(self.position, player_pos)
             if distance <= self.sight_range:
                 self.blackboard.set(keys.PLAYER_POS, player_pos)
+
+    def can_see_player(self):
+        # TODO: The agent should be able to request an expiry of 0 and still get a valid player position because it was set on the same tick
+        value, _ = self.blackboard.get(keys.PLAYER_POS, expiry=1) #expiry=0
+        return value != None
 
     # TODO: Use NumPy instead
     def dot_product(self, a, b):

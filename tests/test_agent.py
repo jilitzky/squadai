@@ -15,7 +15,7 @@ from simulation import sim
 def test_find_player():
     agent = Agent((0, 60), (1, 0), 30)
     sim.move_player((30, 60))
-    agent.search_for_player() # TODO: Replace with sim.tick()
+    agent.tick() # TODO: Replace with sim.tick()
     assert agent.can_see_player()
 
 #  ___    
@@ -26,5 +26,5 @@ def test_find_player():
 def test_search_fail():
     agent = Agent((40, 60), (-1, 0), 30)
     sim.move_player((70, 60))
-    agent.search_for_player() # TODO: Replace with sim.tick()
+    agent.tick() # TODO: Replace with sim.tick()
     assert agent.can_see_player() == False
