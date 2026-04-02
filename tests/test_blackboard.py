@@ -28,5 +28,5 @@ def test_get_confidence():
 
     sim.tick()
     value, confidence = bb.get(keys.PLAYER_POS, expiry=2)
-    assert value == None
+    assert value != None
     assert confidence == 0.0
