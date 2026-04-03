@@ -24,12 +24,11 @@ class Vector2:
     
     def dot(self, other):
         return (self.x * other.x) + (self.y * other.y)
+
+    def dist(self, other):
+        return math.sqrt(self.dist_sq(other))
     
     def dist_sq(self, other):
         dx = other.x - self.x
         dy = other.y - self.y
-        return (dx * dx) + (dy * dy)
-
-    def dist(self, other):
-        return math.sqrt(self.dist_sq(other))
-
+        return (dx * dx) + (dy * dy)    
