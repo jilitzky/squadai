@@ -1,8 +1,7 @@
 from blackboard import Blackboard
 from simulation import sim
 import keys
-import math
-import numpy as np
+import vmath as v
 
 class Agent:
     # TODO: Should the agent register itself with the sim for ticking?
@@ -15,9 +14,9 @@ class Agent:
     def tick(self):
         player_pos = sim.player_pos
         to_player = player_pos - self.position
-        dot = np.dot(to_player, self.orientation)
+        dot = v.dot(to_player, self.orientation)
         if (dot >= 0):
-            distance = math.dist(self.position, player_pos)
+            distance = v.dist(self.position, player_pos)
             if distance <= self.sight_range:
                 self.blackboard.set(keys.PLAYER_POS, player_pos)
 
