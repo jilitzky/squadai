@@ -1,5 +1,6 @@
 from agent import Agent
 from simulation import sim
+import numpy as np
 
 # . = Origin
 # p = Player
@@ -13,10 +14,10 @@ from simulation import sim
 # |___|
 # .    
 def test_find_player():
-    agent = Agent((0, 60), (1, 0), 30)
-    sim.move_player((30, 60))
+    agent = Agent(np.array([0, 60]), np.array([1, 0]), 30)
+    sim.move_player(np.array([30, 60]))
     agent.tick() # TODO: Replace with sim.tick()
-    assert agent.can_see_player()
+    assert agent.can_see_player() == True
 
 #  ___    
 # |   |   
@@ -24,7 +25,7 @@ def test_find_player():
 # |___|   
 # .       
 def test_search_fail():
-    agent = Agent((40, 60), (-1, 0), 30)
-    sim.move_player((70, 60))
+    agent = Agent(np.array([40, 60]), np.array([-1, 0]), 30)
+    sim.move_player(np.array([70, 60]))
     agent.tick() # TODO: Replace with sim.tick()
     assert agent.can_see_player() == False

@@ -2,6 +2,7 @@ from blackboard import Blackboard
 from simulation import sim
 import keys
 import math
+import numpy as np
 
 class Agent:
     # TODO: Should the agent register itself with the sim for ticking?
@@ -13,9 +14,8 @@ class Agent:
 
     def tick(self):
         player_pos = sim.player_pos
-        # TODO: Is there a vector class I can use to avoid using tuples for position and orientation?
-        to_player = (player_pos[0] - self.position[0], player_pos[1] - self.position[1])
-        dot = self.dot_product(self.orientation, to_player)
+        to_player = player_pos - self.position
+        dot = np.dot(to_player, self.orientation)
         if (dot >= 0):
             distance = math.dist(self.position, player_pos)
             if distance <= self.sight_range:
@@ -23,8 +23,4 @@ class Agent:
 
     def can_see_player(self):
         value, _ = self.blackboard.get(keys.PLAYER_POS, expiry=0)
-        return value != None
-
-    # TODO: Use NumPy instead
-    def dot_product(self, a, b):
-        return (a[0] * b[0]) + (a[1] + b[1])
+        return value is not None
