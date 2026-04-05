@@ -6,12 +6,12 @@ class Blackboard:
         self.data = {}
         self.timestamps = {}
 
-    def set(self, key, value):
+    def set(self, key: str, value):
         self.data[key] = value
         self.timestamps[key] = sim.ticks
 
     # TODO: How should we handle a negative expiry?
-    def get(self, key, default=None, expiry: int = None) -> Tuple[Any, float]:
+    def get(self, key: str, default=None, expiry: int = None) -> Tuple[Any, float]:
         if key not in self.data:
             return default, 0.0
         

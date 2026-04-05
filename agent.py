@@ -1,10 +1,11 @@
 from blackboard import Blackboard
 from simulation import sim
+from vmath import Vector2
 import keys
 
 class Agent:
     # TODO: Should the agent register itself with the sim for ticking?
-    def __init__(self, position, orientation, sight_range):
+    def __init__(self, position: Vector2, orientation: Vector2, sight_range: float):
         self.position = position
         self.orientation = orientation
         self.sight_range = sight_range

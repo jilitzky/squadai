@@ -8,7 +8,7 @@ class Simulation:
     def tick(self):
         self.ticks += 1
 
-    def move_player(self, position):
+    def move_player(self, position: Vector2):
         self.player_pos = position
 
 sim = Simulation()
