@@ -15,6 +15,9 @@ class Vector2:
 
     def __mul__(self, scalar):
         return Vector2(self.x * scalar, self.y * scalar)
+    
+    def __rmul__(self, scalar):
+        return self.__mul__(scalar)
 
     def __repr__(self):
         return f"Vector2({self.x}, {self.y})"
