@@ -1,6 +1,6 @@
 from agent import Agent
 from simulation import sim
-from vmath import Vector2
+import numpy as np
 
 # . = Origin
 # p = Player
@@ -14,8 +14,8 @@ from vmath import Vector2
 # |___|
 # .    
 def test_find_player():
-    agent = Agent(Vector2(0, 60), Vector2(1, 0), 30)
-    sim.move_player(Vector2(30, 60))
+    agent = Agent(np.array([0, 60]), np.array([1, 0]), 30)
+    sim.move_player(np.array([30, 60]))
     sim.tick()
     assert agent.can_see_player() == True
 
@@ -25,7 +25,7 @@ def test_find_player():
 # |___|   
 # .       
 def test_search_fail():
-    agent = Agent(Vector2(40, 60), Vector2(-1, 0), 30)
-    sim.move_player(Vector2(70, 60))
+    agent = Agent(np.array([40, 60]), np.array([-1, 0]), 30)
+    sim.move_player(np.array([70, 60]))
     sim.tick()
     assert agent.can_see_player() == False
