@@ -1,21 +1,24 @@
 from blackboard import Blackboard
-from simulation import sim
+from simulation import Simulation
 import keys
 import math
 
 def test_get():
-    bb = Blackboard()
+    sim = Simulation()
+    bb = Blackboard(sim)
     bb.set(keys.PLAYER_POS, sim.player_pos)
     value, _ = bb.get(keys.PLAYER_POS)
     assert value is not None
 
 def test_get_not_found():
-    bb = Blackboard()
+    sim = Simulation()
+    bb = Blackboard(sim)
     value, _ = bb.get(keys.PLAYER_POS)
     assert value is None
 
 def test_get_confidence():
-    bb = Blackboard()
+    sim = Simulation()
+    bb = Blackboard(sim)
     bb.set(keys.PLAYER_POS, sim.player_pos)
     value, confidence = bb.get(keys.PLAYER_POS, expiry=2)
     assert value is not None

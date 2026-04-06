@@ -1,18 +1,15 @@
 from blackboard import Blackboard
-from simulation import sim
 import keys
 import numpy as np
 
 class Agent:
-    def __init__(self, position: np.array, orientation: np.array, sight_range: float):
+    def __init__(self, position: np.array, orientation: np.array, sight_range: float, sim):
         self.position = position
         self.orientation = orientation
         self.sight_range = sight_range
-        self.blackboard = Blackboard()
-        sim.add_agent(self)
+        self.blackboard = Blackboard(sim)
 
-    def tick(self):
-        player_pos = sim.player_pos
+    def tick(self, player_pos: np.array):
         to_player = player_pos - self.position
         dot = np.dot(self.orientation, to_player)
         if (dot >= 0):
