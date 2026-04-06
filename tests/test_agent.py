@@ -15,11 +15,11 @@ import numpy as np
 # .    
 def test_find_player():
     sim = Simulation()
-    agent = Agent(np.array([0, 60]), np.array([1, 0]), 30, sim)
+    agent = Agent(np.array([0, 60]), np.array([1, 0]), 30)
     sim.add_agent(agent)
     sim.move_player(np.array([30, 60]))
     sim.tick()
-    assert agent.can_see_player() == True
+    assert agent.can_see_player(sim.ticks) == True
 
 #  ___    
 # |   |   
@@ -28,8 +28,8 @@ def test_find_player():
 # .       
 def test_search_fail():
     sim = Simulation()
-    agent = Agent(np.array([40, 60]), np.array([-1, 0]), 30, sim)
+    agent = Agent(np.array([40, 60]), np.array([-1, 0]), 30)
     sim.add_agent(agent)
     sim.move_player(np.array([70, 60]))
     sim.tick()
-    assert agent.can_see_player() == False
+    assert agent.can_see_player(sim.ticks) == False

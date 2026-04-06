@@ -9,7 +9,7 @@ class Simulation:
     def tick(self):
         self.ticks += 1
         for agent in self.agents:
-            agent.tick(self.player_pos)
+            agent.tick(self.player_pos, self.ticks)
 
     def add_agent(self, agent):
         self.agents.append(agent)
