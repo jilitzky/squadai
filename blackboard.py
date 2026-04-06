@@ -17,12 +17,8 @@ class Blackboard:
             return self.data[key], 1.0
 
         age = sim_ticks - self.timestamps[key]
-        
         if expiry == 0:
-            if age == 0:
-                return self.data[key], 1.0
-            else:
-                return default, 0.0
+            return (self.data[key], 1.0) if age == 0 else (default, 0.0)
 
         confidence = max(1.0 - (age / expiry), 0.0)
         return self.data[key], confidence
