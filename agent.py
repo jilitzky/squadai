@@ -11,7 +11,8 @@ class Agent:
 
     def tick(self, player_pos: np.array):
         to_player = player_pos - self.position
-        dot = np.dot(self.orientation, to_player)
+        to_player_dir = to_player / np.linalg.norm(to_player)
+        dot = np.dot(self.orientation, to_player_dir)
         if (dot >= 0):
             distance = np.linalg.norm(player_pos - self.position)
             if distance <= self.sight_range:
