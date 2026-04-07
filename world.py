@@ -10,7 +10,6 @@ class World:
         self.entities.append(entity)
 
     def update(self):
+        self.frames += 1
         for entity in self.entities:
             entity.update()
-
-        self.frames += 1

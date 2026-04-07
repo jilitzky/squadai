@@ -21,5 +21,5 @@ class NPC(Entity):
                 self.blackboard.set(keys.PLAYER_POS, player_pos)
 
     def can_see_player(self):
-        value, _ = self.blackboard.get(keys.PLAYER_POS, expiry=1)
+        value, _ = self.blackboard.get(keys.PLAYER_POS, expiry=0)
         return value is not None
