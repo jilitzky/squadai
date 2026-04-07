@@ -1,6 +1,15 @@
-from agent import Agent
+from locator import locator
+from npc import NPC
+from world import World
 import numpy as np
+import pytest
 
+@pytest.fixture(autouse=True)
+def setup():
+    world = World()
+    locator.provide_world(world)
+
+# Symbols used by tests to describe a scenario
 # . = Origin
 # p = Player
 # > = Agent
@@ -13,13 +22,12 @@ import numpy as np
 # |___|
 # .    
 def test_find_player():
-    pass
-    # sim = Simulation()
-    # agent = Agent(np.array([0, 60]), np.array([1, 0]), 30)
-    # sim.add_agent(agent)
-    # sim.move_player(np.array([30, 60]))
-    # sim.tick()
-    # assert agent.can_see_player(sim.ticks) == True
+    world = locator.get_world()
+    world.player.position = np.array([30, 60])
+    npc = NPC("NPC", np.array([0, 60]), np.array([1, 0]), 30)
+    world.add_entity(npc)
+    world.update()
+    assert npc.can_see_player() == True
 
 #  ___    
 # |   |   
@@ -27,10 +35,9 @@ def test_find_player():
 # |___|   
 # .       
 def test_search_fail():
-    pass
-    # sim = Simulation()
-    # agent = Agent(np.array([40, 60]), np.array([-1, 0]), 30)
-    # sim.add_agent(agent)
-    # sim.move_player(np.array([70, 60]))
-    # sim.tick()
-    # assert agent.can_see_player(sim.ticks) == False
+    world = locator.get_world()
+    world.player.position = np.array([70, 60])
+    npc = NPC("NPC", np.array([40, 60]), np.array([-1, 0]), 30)
+    world.add_entity(npc)
+    world.update()
+    assert npc.can_see_player() == False

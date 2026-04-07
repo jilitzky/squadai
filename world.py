@@ -1,7 +1,8 @@
-from entity import Entity
+from player import Player
 
 class World:
     def __init__(self):
+        self.player = Player()
         self.entities = []
         self.frames = 0
 
