@@ -1,3 +1,6 @@
-class NPC:
-    def __init__(Entity):
-        pass
+from blackboard import Blackboard
+from entity import Entity
+
+class NPC(Entity):
+    def __init__(self):
+        self.blackboard = Blackboard()

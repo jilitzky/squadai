@@ -1,6 +1,6 @@
 class Locator:
-    def get_time(self):
-        return self.time
+    def get_world(self):
+        return self.world
     
-    def provide_time(self, time):
-        self.time = time
+    def provide_world(self, world):
+        self.time = world
