@@ -3,4 +3,6 @@ class Locator:
         return self.world
     
     def provide_world(self, world):
-        self.time = world
+        self.world = world
+
+locator = Locator()
