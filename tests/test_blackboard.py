@@ -3,22 +3,26 @@ from locator import locator
 from world import World
 import keys
 import numpy as np
+import pytest
+
+@pytest.fixture(autouse=True)
+def setup():
+    world = World()
+    locator.provide_world(world)
 
 def test_get():
-    locator.provide_world(World())
     bb = Blackboard()
     bb.set(keys.PLAYER_POS, np.array([0, 0]))
     value, _ = bb.get(keys.PLAYER_POS)
     assert value is not None
 
 def test_get_not_found():
-    locator.provide_world(World())
     bb = Blackboard()
     value, _ = bb.get(keys.PLAYER_POS)
     assert value is None
 
 def test_get_confidence():
-    world = World()
+    world = locator.get_world()
     locator.provide_world(world)
     bb = Blackboard()
     bb.set(keys.PLAYER_POS, np.array([0, 0]))
