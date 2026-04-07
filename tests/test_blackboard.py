@@ -1,35 +1,41 @@
 from blackboard import Blackboard
-from simulation import Simulation
+from locator import locator
+from world import World
 import keys
-import math
+import numpy as np
+import pytest
+
+@pytest.fixture(autouse=True)
+def setup():
+    world = World()
+    locator.provide_world(world)
 
 def test_get():
-    sim = Simulation()
     bb = Blackboard()
-    bb.set(keys.PLAYER_POS, sim.player_pos, sim.ticks)
-    value, _ = bb.get(keys.PLAYER_POS, sim.ticks)
+    bb.set(keys.PLAYER_POS, np.array([0, 0]))
+    value, _ = bb.get(keys.PLAYER_POS)
     assert value is not None
 
 def test_get_not_found():
-    sim = Simulation()
     bb = Blackboard()
-    value, _ = bb.get(keys.PLAYER_POS, sim.ticks)
+    value, _ = bb.get(keys.PLAYER_POS)
     assert value is None
 
 def test_get_confidence():
-    sim = Simulation()
+    world = locator.get_world()
+    locator.provide_world(world)
     bb = Blackboard()
-    bb.set(keys.PLAYER_POS, sim.player_pos, sim.ticks)
-    value, confidence = bb.get(keys.PLAYER_POS, sim.ticks, expiry=2)
+    bb.set(keys.PLAYER_POS, np.array([0, 0]))
+    value, confidence = bb.get(keys.PLAYER_POS, expiry=2)
     assert value is not None
     assert confidence == 1.0
     
-    sim.tick()
-    value, confidence = bb.get(keys.PLAYER_POS, sim.ticks, expiry=2)
+    locator.get_world().update()
+    value, confidence = bb.get(keys.PLAYER_POS, expiry=2)
     assert value is not None
-    assert math.isclose(confidence, 0.5)
+    assert np.isclose(confidence, 0.5)
 
-    sim.tick()
-    value, confidence = bb.get(keys.PLAYER_POS, sim.ticks, expiry=2)
+    locator.get_world().update()
+    value, confidence = bb.get(keys.PLAYER_POS, expiry=2)
     assert value is not None
     assert confidence == 0.0
