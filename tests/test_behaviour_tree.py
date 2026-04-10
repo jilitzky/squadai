@@ -5,14 +5,32 @@ import pytest
 def setup():
     pass
 
-def test_action_node():
-    class SuccessNode(Node):
+def test_action():
+    class Action(Node):
         def __init__(self):
-            super().__init__("Success Node")
+            super().__init__("Action")
 
         def tick(self, agent):
             return NodeStatus.SUCCESS
 
-    node = SuccessNode()
-    result = node.tick(None)
+    action = Action()
+    result = action.tick(None)
     assert result == NodeStatus.SUCCESS
+
+def test_condition():
+    class Condition(Node):
+        def __init__(self):
+            super().__init__("Condition")
+
+        def tick(self, agent):
+            return NodeStatus.FAILURE
+
+    condition = Condition()
+    result = condition.tick(None)
+    assert result == NodeStatus.FAILURE
+
+def test_sequence():
+    assert True
+
+def test_selector():
+    assert True
