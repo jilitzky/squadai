@@ -6,14 +6,30 @@ class NodeStatus(Enum):
     RUNNING = 3
 
 class Node:
-    def __init__(self, name="Node"):
+    def __init__(self, name):
         self.name = name
 
     def tick(self, agent):
         raise NotImplementedError("Every node must implement its own tick method.")
 
+class Action(Node):
+    def __init__(self, name, action_func):
+        super().__init__(name)
+        self.action_func = action_func
+
+    def tick(self, agent):
+        return self.action_func(agent)
+    
+class Condition(Node):
+    def __init__(self, name, check_func):
+        super().__init__(name)
+        self.check_func = check_func
+
+    def tick(self, agent):
+        return self.check_func(agent)
+
 class CompositeNode(Node):
-    def __init__(self, name="Composite", children=None):
+    def __init__(self, name, children=None):
         super().__init__(name)
         self.children = children if children else []
 

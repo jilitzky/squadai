@@ -1,4 +1,4 @@
-from behaviour_tree import NodeStatus, Node
+from behaviour_tree import NodeStatus, Action, Condition
 import pytest
 
 @pytest.fixture(autouse=True)
@@ -6,26 +6,26 @@ def setup():
     pass
 
 def test_action():
-    class Action(Node):
+    class TestAction(Action):
         def __init__(self):
-            super().__init__("Action")
+            super().__init__("TestAction", self.run)
 
-        def tick(self, agent):
+        def run(self, agent):
             return NodeStatus.SUCCESS
 
-    action = Action()
+    action = TestAction()
     result = action.tick(None)
     assert result == NodeStatus.SUCCESS
 
 def test_condition():
-    class Condition(Node):
+    class TestCondition(Condition):
         def __init__(self):
-            super().__init__("Condition")
+            super().__init__("TestCondition", self.run)
 
-        def tick(self, agent):
+        def run(self, agent):
             return NodeStatus.FAILURE
 
-    condition = Condition()
+    condition = TestCondition()
     result = condition.tick(None)
     assert result == NodeStatus.FAILURE
 
