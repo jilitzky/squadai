@@ -9,7 +9,7 @@ class Node:
     def __init__(self, name):
         self.name = name
 
-    def tick(self, agent):
+    def tick(self, _):
         raise NotImplementedError("Every node must implement its own tick method.")
 
 class Action(Node):
@@ -57,5 +57,5 @@ class Sequence(CompositeNode):
             if status != NodeStatus.SUCCESS:
                 return status
             
-        # Every child succeeded!
+        # Every child succeeded.
         return NodeStatus.SUCCESS

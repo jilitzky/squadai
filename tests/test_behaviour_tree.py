@@ -47,7 +47,7 @@ def test_action():
         def __init__(self):
             super().__init__("TestAction", self.run)
 
-        def run(self, agent):
+        def run(self, _):
             return bt.NodeStatus.SUCCESS
 
     action = TestAction()
@@ -59,7 +59,7 @@ def test_condition():
         def __init__(self):
             super().__init__("TestCondition", self.run)
 
-        def run(self, agent):
+        def run(self, _):
             return bt.NodeStatus.FAILURE
 
     condition = TestCondition()
