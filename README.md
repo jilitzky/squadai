@@ -1,2 +1,2 @@
 # SquadAI
-An exploration of distributed AI for squads written in Python.
+A simple implementation of squad AI dynamics written in Python.
